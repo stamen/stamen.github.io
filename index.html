@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stamen #30DayMapChallenge</title>
+  <meta name="description" content="Maps made by the Stamen team for the 2026 #30DayMapChallenge.">
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --fg: #1d1d1b;
+      --muted: #6b6a66;
+      --rule: #d9d5cc;
+      --accent: #c2410c;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161615;
+        --fg: #eceae4;
+        --muted: #9a988f;
+        --rule: #33322f;
+        --accent: #fb923c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 4rem 1rem 3rem;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 7vw, 2.25rem);
+      overflow-wrap: anywhere;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+    }
+    .lede { color: var(--muted); margin: 0 0 3rem; }
+    h2 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 0.5rem;
+    }
+    ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+    li { border-bottom: 1px solid var(--rule); }
+    li a {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr auto;
+      align-items: baseline;
+      gap: 0 1rem;
+      padding: 1rem 0;
+      color: inherit;
+      text-decoration: none;
+    }
+    li a:hover .name, li a:focus-visible .name { color: var(--accent); }
+    .day {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .name { font-weight: 600; font-size: 1.15rem; display: block; }
+    .meta { color: var(--muted); font-size: 0.9rem; display: block; }
+    .arrow { color: var(--muted); }
+    a { color: var(--accent); }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Stamen #30DayMapChallenge</h1>
+    <p class="lede">Maps made by the <a href="https://stamen.com/">Stamen</a> team for the 2026 <a href="https://30daymapchallenge.com/">#30DayMapChallenge</a>.</p>
+
+    <section>
+      <h2>2026 maps</h2>
+      <ul id="maps"></ul>
+      <noscript><p>This list needs JavaScript to display.</p></noscript>
+    </section>
+
+    <footer>
+      <a href="https://github.com/stamen">github.com/stamen</a>
+    </footer>
+  </main>
+
+  <script>
+    // ── Add new maps here ──────────────────────────────────────────────
+    // One line per map, in any order: the list sorts itself by day.
+    // Several maps can share the same day.
+    const MAPS = [
+      { day: 1, title: "Time Zone Inversions",  author: "Alan McConchie", url: "https://mappingmashups.github.io/time-zone-inversions/" },
+      { day: 2, title: "Interrupted Contours",  author: "Alan McConchie", url: "https://mappingmashups.github.io/contourvolution/" },
+      { day: 3, title: "Voronoi Highways",      author: "Alan McConchie", url: "https://mappingmashups.github.io/voronoi-highways/" },
+      { day: 4, title: "Candy Clusters",        author: "Kelsey Taylor",  url: "https://stamen.github.io/candy-clusters/" },
+    ];
+    // ───────────────────────────────────────────────────────────────────
+
+    const list = document.getElementById("maps");
+    MAPS
+      .map((m, i) => ({ ...m, i }))
+      .sort((a, b) => a.day - b.day || a.i - b.i)
+      .forEach((m) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = m.url;
+
+        const day = document.createElement("span");
+        day.className = "day";
+        day.textContent = "Day " + m.day;
+
+        const text = document.createElement("span");
+        const name = document.createElement("span");
+        name.className = "name";
+        name.textContent = m.title;
+        const meta = document.createElement("span");
+        meta.className = "meta";
+        meta.textContent = m.author;
+        text.append(name, meta);
+
+        const arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+
+        a.append(day, text, arrow);
+        li.append(a);
+        list.append(li);
+      });
+  </script>
+</body>
+</html>
