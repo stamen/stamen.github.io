@@ -7,19 +7,21 @@
   <meta name="description" content="Projects from the Stamen team, hosted on GitHub Pages.">
   <style>
     :root {
-      --bg: #f7f5f0;
-      --fg: #1d1d1b;
-      --muted: #6b6a66;
-      --rule: #d9d5cc;
-      --accent: #c2410c;
+      --bg: #fff;
+      --fg: #000;
+      --hl: #ffff00;
+      --hl-fg: #000;
+      --box: #000;
+      --box-fg: #fff;
+      --muted: #555;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #161615;
-        --fg: #eceae4;
-        --muted: #9a988f;
-        --rule: #33322f;
-        --accent: #fb923c;
+        --bg: #000;
+        --fg: #fff;
+        --box: #fff;
+        --box-fg: #000;
+        --muted: #aaa;
       }
     }
     * { box-sizing: border-box; }
@@ -27,50 +29,71 @@
       margin: 0;
       background: var(--bg);
       color: var(--fg);
-      font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font: 18px/1.45 "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     main {
-      max-width: 40rem;
+      max-width: 44rem;
       margin: 0 auto;
       padding: 4rem 1rem 3rem;
     }
     h1 {
-      font-size: clamp(1.75rem, 7vw, 2.25rem);
-      overflow-wrap: anywhere;
-      line-height: 1.1;
+      font-size: min(4rem, calc((min(100vw, 44rem) - 2rem) / 11.5));
+      font-weight: 700;
+      line-height: 1.12;
       letter-spacing: -0.02em;
-      margin: 0 0 0.5rem;
+      margin: 0 0 1.5rem;
+      overflow-wrap: anywhere;
     }
-    .lede { color: var(--muted); margin: 0 0 3rem; }
+    .hl {
+      background: var(--hl);
+      color: var(--hl-fg);
+      padding: 0 0.12em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    .lede { font-size: 1.15rem; margin: 0 0 3rem; max-width: 34rem; }
+    a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    a:hover, a:focus-visible { background: var(--hl); color: var(--hl-fg); }
     h2 {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin: 0 0 0.5rem;
+      display: inline-block;
+      background: var(--box);
+      color: var(--box-fg);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.35rem 0.7rem;
+      margin: 0;
     }
-    ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
-    li { border-bottom: 1px solid var(--rule); }
+    ul { list-style: none; margin: 0; padding: 0; border-top: 4px solid var(--fg); }
+    li { border-bottom: 2px solid var(--fg); }
     li a {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
       gap: 0 1rem;
-      padding: 1rem 0;
-      color: inherit;
+      padding: 1rem 0.5rem;
       text-decoration: none;
     }
-    li a:hover .name, li a:focus-visible .name { color: var(--accent); }
-    .name { font-weight: 600; font-size: 1.15rem; }
-    .arrow { color: var(--muted); }
-    a { color: var(--accent); }
-    footer { margin-top: 3rem; color: var(--muted); font-size: 0.9rem; }
+    ul.maps li a { grid-template-columns: 4.25rem 1fr auto; }
+    .day {
+      justify-self: start;
+      background: var(--box);
+      color: var(--box-fg);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    li a:hover .day, li a:focus-visible .day { background: var(--hl-fg); color: var(--hl); }
+    .name { display: block; font-weight: 700; font-size: 1.35rem; line-height: 1.2; }
+    .meta { display: block; font-size: 1rem; }
+    .arrow { font-weight: 700; font-size: 1.35rem; }
+    footer { margin-top: 3rem; font-weight: 700; }
   </style>
 </head>
 <body>
   <main>
-    <h1>Stamen</h1>
+    <h1><span class="hl">Stamen</span></h1>
     <p class="lede">Projects from the <a href="https://stamen.com/">Stamen</a> team.</p>
 
     <section>
